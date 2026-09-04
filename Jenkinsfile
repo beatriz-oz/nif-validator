@@ -95,5 +95,16 @@ pipeline {
         }
       }
     }
+
+    stage('Deployment') {
+      steps {
+        sshagent(credentials:['aws-rhel-key-20241125']) {
+          sh"""
+          ssh -o StrictHostKeyChecking=no redhat@18.197.141.98 \
+            'docker rm -f nif-validator && docker run -d --name nif-validator -p 8080:9046 cfreire70/nif-validator'
+          """
+        }
+      }
+    }
   }
 }
