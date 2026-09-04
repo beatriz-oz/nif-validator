@@ -13,7 +13,7 @@ pipeline {
   stages{
     stage{'Setup'} {
       steps{
-          sh printenv
+        sh printenv
         }
       }
   }
